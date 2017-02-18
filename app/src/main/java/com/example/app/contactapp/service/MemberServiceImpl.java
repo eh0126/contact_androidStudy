@@ -1,5 +1,8 @@
 package com.example.app.contactapp.service;
 
+import android.content.Context;
+
+import com.example.app.contactapp.dao.MemberDao;
 import com.example.app.contactapp.domain.MemberBean;
 
 import java.util.ArrayList;
@@ -9,6 +12,10 @@ import java.util.ArrayList;
  */
 
 public class MemberServiceImpl implements  MemberService{
+    MemberDao dao;
+    public MemberServiceImpl(Context context) {
+        dao = new MemberDao(context);
+    }
 
     @Override
     public void add(MemberBean bean) {
@@ -17,7 +24,7 @@ public class MemberServiceImpl implements  MemberService{
 
     @Override
     public MemberBean findOne(MemberBean bean) {
-        return null;
+        return dao.findOne(bean);
     }
 
     @Override

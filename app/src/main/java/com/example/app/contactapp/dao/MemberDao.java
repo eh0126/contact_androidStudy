@@ -1,8 +1,10 @@
 package com.example.app.contactapp.dao;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.app.contactapp.domain.MemberBean;
 
@@ -13,20 +15,45 @@ import java.util.ArrayList;
  */
 
 public class MemberDao extends SQLiteOpenHelper{
-    public MemberDao(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, "", null, 1);
+    public MemberDao(Context context) {
+        super(context, "hanbit.db", null, 1);
+        this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = String.format("%s", "CREATE TABLE table_name\n" +
+        String sql=String.format("%s","CREATE TABLE IF NOT EXISTS Member\n" +
                 "(\n" +
-                " id text(10) PRIMARY KEY,\n" +
-                " pass text(10),\n" +
-                " name text(10),\n" +
-                " phone text(13),\n" +
-                " addr text(10),\n" +
-                " profile text(10));");
+                "id text(20) PRIMARY KEY,\n" +
+                "pass text(20),\n" +
+                "name text(20),\n" +
+                "email text(20),\n" +
+                "phone text(20),\n" +
+                "addr text(20),\n" +
+                "profile text(20));");
+        db.execSQL(sql);
+        db.execSQL("CREATE TABLE IF NOT EXISTS Message(\n" +
+                "    _id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    sender TEXT(20),\n" +
+                "    receiver TEXT(20),\n" +
+                "    content TEXT(20),\n" +
+                "    writeTime TEXT(20),\n" +
+                "    id TEXT(20),\n" +
+                "    FOREIGN KEY(id) REFERENCES Member(id)\n" +
+                ");\n");
+         /*
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('hong','1','홍길동','hong@test.com','010-1234-5678','default','서울');");
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('kim','1','김유신','kim@test.com','010-1234-5678','default','서울');");
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('lee','1','이순신','lee@test.com','010-1234-5678','default','서울');");
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('park','1','박지성','park@test.com','010-1234-5678','default','부산');");
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('yoo','1','유비','yoo@test.com','010-1234-5678','default','인천');");
+         */
+
     }
 
     @Override
@@ -46,6 +73,22 @@ public class MemberDao extends SQLiteOpenHelper{
         MemberBean member = new MemberBean();
         String sql = String.format("SELECT id, pass, name, phone, addr, profile " +
                 "FROM Member WHERE id = '%s';" , bean.getId());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if(cursor.moveToNext()){
+            Log.d("ID 결과 : ", cursor.getString(0));
+            member.setId(cursor.getString(0));
+            member.setPass(cursor.getString(1));
+            member.setName(cursor.getString(2));
+            member.setEmail(cursor.getString(3));
+            member.setPhone(cursor.getString(4));
+            member.setProfile(cursor.getString(5));
+            member.setAddr(cursor.getString(6));
+        }else{
+            member.setId("fail");
+        }
+        Log.d("login result : ", member.getId());
         return member;
     }
     //READ SOME

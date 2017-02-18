@@ -7,15 +7,22 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.app.contactapp.R;
+import com.example.app.contactapp.domain.MemberBean;
+import com.example.app.contactapp.service.MemberService;
+import com.example.app.contactapp.service.MemberServiceImpl;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
     EditText etID, etPass, etName, etPhone, etAddr;
     Button btSubmit, btCancel;
+    MemberService service;
+    MemberBean member;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singup);
+        service = new MemberServiceImpl(this.getApplicationContext());
+        member = new MemberBean();
         etID = (EditText) findViewById(R.id.etID);
         etPass = (EditText) findViewById(R.id.etPass);
         etName = (EditText) findViewById(R.id.etName);
@@ -31,6 +38,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btSubmit:
+                member.setAddr(etAddr.getText().toString());
+                service.add(member);
                 break;
             case R.id.btCancel:
                 break;

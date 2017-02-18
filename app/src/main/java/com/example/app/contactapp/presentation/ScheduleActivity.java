@@ -12,6 +12,10 @@ import android.widget.TimePicker;
 
 import com.example.app.contactapp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class ScheduleActivity extends AppCompatActivity implements View.OnClickListener{
     RadioButton rbCalendar, rbClock;
     CalendarView cvSet;
@@ -41,7 +45,11 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         cvSet.setVisibility(View.VISIBLE);
         tpSet.setVisibility(View.INVISIBLE);
 
-        //tvToday.setText("TODAT : " + new SimpleDateFormat("yyyy-MM-dd").format( new Date() ));
+        rbCalendar.setOnClickListener(this);
+        rbClock.setOnClickListener(this);
+        btSet.setOnClickListener(this);
+
+        tvToday.setText("TODAT : " + new SimpleDateFormat("yyyy-MM-dd").format( new Date() ));
         cvSet.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -49,9 +57,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        rbCalendar.setOnClickListener(this);
-        rbClock.setOnClickListener(this);
-        btSet.setOnClickListener(this);
+
     }
 
     @Override
