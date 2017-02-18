@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.app.contactapp.R;
 import com.example.app.contactapp.domain.MemberBean;
@@ -39,11 +40,11 @@ public class SigninActivit extends AppCompatActivity implements View.OnClickList
                 String pass = etPass.getText().toString();
                 member.setId(id);
                 member.setPass(pass);
-                MemberBean result = service.findOne(member);
 
-                if( pass.equals(result.getPass()) ){
+                if(service.login(member)){
                     startActivity(new Intent(SigninActivit.this, ListActivity.class));
                 }else{
+                    Toast.makeText(SigninActivit.this, "로그인실패", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.btCancel :

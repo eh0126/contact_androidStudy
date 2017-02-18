@@ -9,8 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/ivProfile"
             android:layout_width="match_parent"
-            android:layout_height="180dp" />
+            android:layout_height="180dp"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -78,14 +80,29 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="이메일 : "/>
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
         <Button
             android:id="@+id/btCall"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="전화걸기"/>
         <Button
             android:id="@+id/btMessage"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="메세지보내기"/>
     </LinearLayout>
@@ -97,12 +114,12 @@
         android:layout_marginTop="10dp">
         <Button
             android:id="@+id/btPosition"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="위치보기"/>
         <Button
             android:id="@+id/btDelete"
-            android:layout_width="2000dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="삭제"/>
     </LinearLayout>
@@ -114,12 +131,12 @@
         android:layout_marginTop="10dp">
         <Button
             android:id="@+id/btUpdate"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="수정"/>
         <Button
             android:id="@+id/btList"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="목록"/>
     </LinearLayout>

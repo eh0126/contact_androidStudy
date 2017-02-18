@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.btSignIn:
                 Toast.makeText(MainActivity.this, "Go to Add", Toast.LENGTH_LONG).show();
-                startActivity( new Intent(MainActivity.this, SignupActivity.class) );
+                startActivity( new Intent(MainActivity.this, SigninActivit.class) );
                 break;
             case R.id.btSignUp :
                 Toast.makeText(MainActivity.this, "Go to Login", Toast.LENGTH_LONG).show();
-                startActivity( new Intent(MainActivity.this, SigninActivit.class) );
+                startActivity( new Intent(MainActivity.this, SignupActivity.class) );
                 break;
         }
     }
